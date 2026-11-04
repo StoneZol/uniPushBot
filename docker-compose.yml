@@ -1,0 +1,11 @@
+services:
+  unipushbot:
+    build: .
+    container_name: uniPushBot
+    restart: unless-stopped
+    ports:
+      - "6666:6666"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/data
