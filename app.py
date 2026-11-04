@@ -35,7 +35,10 @@ class SubscriberStore:
     async def load(self) -> None:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         if not self.path.exists():
-            await self._save_unlocked()
+            try:
+                await self._save_unlocked()
+            except OSError as exc:
+                log.warning("cannot init subscribers file yet: %s", exc)
             return
         raw = self.path.read_text(encoding="utf-8").strip()
         if not raw:

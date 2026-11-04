@@ -11,11 +11,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
 
-RUN useradd --create-home --uid 10001 app \
-    && mkdir -p /data \
-    && chown -R app:app /data /app
+RUN mkdir -p /data
 
-USER app
 EXPOSE 6666
 VOLUME ["/data"]
 
